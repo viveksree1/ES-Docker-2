@@ -1,0 +1,16 @@
+cluster.name: "docker-cluster"
+# This is the hostname or IP address of the node. This is used to publish
+# this host to other nodes in the cluster.
+network.host: "elsdata02"
+
+# This is a list of other nodes in the cluster that are likely to be live and
+# contactable.
+discovery.zen.ping.unicast.hosts: ["elsmaster"]
+
+# This number should be set in accordance to the following quorum formula:
+# ((master_eligible_nodes / 2) + 1)
+discovery.zen.minimum_master_nodes: 1
+
+
+node.master: false
+node.data: true

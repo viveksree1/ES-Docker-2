@@ -1,0 +1,39 @@
+version: '3'
+services:
+  elsmaster:
+    build:
+      context: ./docker-els-ms
+      dockerfile: ../Dockerfile
+      #args:
+       #- APPNAME =docker-els-ms
+    hostname: elsmaster
+    ports:
+     - "127.0.0.1:9000:9000"
+
+  elsdata1:
+    build:
+      context: ./docker-els-data
+      dockerfile: ../Dockerfile
+      #args:
+      # - appfolder=docker-els-data
+    hostname: elsdata01
+     #extra_hosts:
+      #elsmaster: 172.25.0.10
+    links:
+     - elsmaster
+    ports:
+     - "127.0.0.1:9001:9000"
+
+  elsdata2:
+    build:
+      context: ./docker-els-data02
+      dockerfile: ../Dockerfile
+      args:
+       - appfolder=docker-els-data02
+    hostname: elsdata02
+    links:
+     - elsmaster
+    #extra_hosts:
+      #elsmaster: 172.25.0.10
+    ports:
+     - "127.0.0.1:9002:9000"
